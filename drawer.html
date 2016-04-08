@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+ <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+ <title>javascript canvas画图实例</title>
+ <meta http-equiv="X-UA-Compatible" content="IE=7" />
+ <meta name="keywords" content="" />
+ <meta name="description" content="" />
+ <style>
+ *{margin:0;padding:0;}
+ .fa{width:740px;margin:0 auto;}
+ .top{margin:20px 0;}
+ .top input{width:25px;height:25px;border:1px solid #fff;border-radius:4px;background:#ddd;}
+ #canvas{background:#eee;cursor:default;}
+ .font input{font-size:14px;}
+ </style>
+</head>
+<body>
+<div class="fa">
+    <div class="top">
+      <input id="clear" type="button" value="清除画布" style="width:80px;"/>
+      <input id="imgurl" type="button" value="导出图片路径" style="width:80px;"/>
+    </div>
+    <div id="data" width="670" style="word-wrap: break-word;"></div>
+    <canvas id="canvas" width="670" height="625">您的浏览器不支持 canvas 标签</canvas>
+    <div id="div1"></div>
+</div>
+<script>
+(function(){
+    var paint={
+        init:function()
+        {
+            this.load();
+
+        },
+        load:function()
+        {
+            this.x=[];//记录鼠标移动是的X坐标
+            this.y=[];//记录鼠标移动是的Y坐标
+            this.saved_x=[];//记录鼠标移动是的X坐标
+            this.saved_y=[];//记录鼠标移动是的Y坐标
+            this.clickDrag=[];
+            this.lock=false;//鼠标移动前，判断鼠标是否按下
+            this.$=function(id){return typeof id=="string"?document.getElementById(id):id;};
+            this.canvas=this.$("canvas");
+            if (this.canvas.getContext) {
+
+            } else {
+                alert("您的浏览器不支持 canvas 标签");
+                return;
+            }
+            this.cxt=this.canvas.getContext('2d');
+            this.cxt.lineJoin = "round";//context.lineJoin - 指定两条线段的连接方式
+            this.cxt.lineWidth = 5;//线条的宽度
+            this.iptClear=this.$("clear");
+            this.imgurl=this.$("imgurl");//图片路径按钮
+            this.w=this.canvas.width;//取画布的宽
+            this.h=this.canvas.height;//取画布的高
+            this.touch =("createTouch" in document);//判定是否为手持设备
+            //支持触摸式使用相应的事件替代
+            this.StartEvent = this.touch ? "touchstart" : "mousedown";
+            this.MoveEvent = this.touch ? "touchmove" : "mousemove";
+            this.EndEvent = this.touch ? "touchend" : "mouseup";
+            this.bind();
+        },
+        bind:function()
+        {
+            var t=this;
+            /*清除画布*/
+            this.iptClear.onclick=function()
+            {
+                t.clear();
+            };
+            /*鼠标按下事件，记录鼠标位置，并绘制，解锁lock，打开mousemove事件*/
+            this.canvas['on'+t.StartEvent]=function(e)
+            {
+                var touch=t.touch ? e.touches[0] : e;
+                //鼠标在画布上的x坐标，以画布左上角为起点
+                var _x=touch.clientX - touch.target.offsetLeft;
+                //鼠标在画布上的y坐标，以画布左上角为起点
+                var _y=touch.clientY - touch.target.offsetTop;
+                t.movePoint(_x,_y); //记录鼠标位置
+                t.drawPoint();  //绘制路线
+                t.lock=true;
+            };
+            /*鼠标移动事件*/
+            this.canvas['on'+t.MoveEvent]=function(e)
+            {
+                var touch=t.touch ? e.touches[0] : e;
+                if(t.lock)//t.lock为true则执行
+                {
+                    //鼠标在画布上的x坐标，以画布左上角为起点
+                    var _x=touch.clientX - touch.target.offsetLeft;
+                    //鼠标在画布上的y坐标，以画布左上角为起点
+                    var _y=touch.clientY - touch.target.offsetTop;
+
+                    t.movePoint(_x,_y,true);//记录鼠标位置
+                    t.drawPoint();//绘制路线
+                }
+            };
+            this.canvas['on'+t.EndEvent]=function(e)
+            {
+                /*重置数据*/
+                t.lock=false;
+                t.x=[];
+                t.y=[];
+                t.clickDrag=[];
+                clearInterval(t.Timer);
+                t.Timer=null;
+
+            };
+            this.imgurl.onclick=function()
+            {
+                t.getUrl();
+            };
+        },
+        movePoint:function(x,y,dragging)
+        {
+            /*将鼠标坐标添加到各自对应的数组里*/
+            this.x.push(x);
+            this.y.push(y);
+            this.saved_x.push(x);
+            this.saved_y.push(y);
+            this.clickDrag.push(y);
+        },
+        drawPoint:function(x,y,radius)
+        {
+            for(var i=0; i < this.x.length; i++)//循环数组
+            {
+                this.cxt.beginPath();//context.beginPath() , 准备绘制一条路径
+
+                if(this.clickDrag[i] && i){//当是拖动而且i!=0时，从上一个点开始画线。
+                    this.cxt.moveTo(this.x[i-1], this.y[i-1]);//context.moveTo(x, y) , 新开一个路径，并指定路径的起点
+                }else{
+                    this.cxt.moveTo(this.x[i]-1, this.y[i]);
+                }
+                this.cxt.lineTo(this.x[i], this.y[i]);//context.lineTo(x, y) , 将当前点与指定的点用一条笔直的路径连接起来
+                this.cxt.closePath();//context.closePath() , 如果当前路径是打开的则关闭它
+                this.cxt.stroke();//context.stroke() , 绘制当前路径
+            }
+        },
+        clear:function()
+        {
+            this.cxt.clearRect(0, 0, this.w, this.h);//清除画布，左上角为起点
+            this.saved_x = [];
+            this.saved_y = [];
+        },
+
+        preventDefault:function(e){
+            /*阻止默认*/
+            var touch=this.touch ? e.touches[0] : e;
+                if(this.touch) touch.preventDefault();
+                else window.event.returnValue = false;
+        },
+        getUrl:function()
+        {
+            this.$("data").innerHTML='X坐标: <p>['+this.saved_x+']</p>'+
+                'Y坐标: <p>['+this.saved_y+']</p>';
+        },
+
+    };
+    paint.init();
+})();
+</script>
+</body>
+</html>
