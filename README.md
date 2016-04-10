@@ -1,13 +1,30 @@
 # Anniversary
 Shawn Tang and Mary Zhang 一周年纪念
+[Demo](http://seasonstar.github.io/anniversary/)
 
 A HTML5 page using codes to express a programmer's romance for his girl.
+用以表达程序员的浪漫，给你身边的女生惊喜。
+设计了画图工具，希望能让非程序员也能玩起来。
 
 ## Screenshot
-[](http://785i8w.com2.z0.glb.qiniucdn.com/love-story.png)
+![](http://785i8w.com2.z0.glb.qiniucdn.com/love-story.png)
 
-## Flower Effect
-flower效果在`js/garden.js`上.
+## 使用说明
+0. `git clone https://github.com/seasonstar/anniversary.git`
+
+1. 打开 画图工具[drawer.html](http://seasonstar.github.io/anniversary/drawer.html)
+
+2. 绘制你想要的图像。
+
+3. 点击“导出图像路径”，得到x坐标和y坐标的数据
+
+4. 将所得x坐标和y坐标 分别保存到`index.html`的`x_coords`和`y_coords`列表中
+
+5. 刷新index.html页面。
+
+### Flower Effect
+flower效果在`js/garden.js`上设置.
+
 ```Javascript
     Garden.options = {
         petalCount: {   // 花瓣数
@@ -41,10 +58,11 @@ flower效果在`js/garden.js`上.
 ```
 
 ## Drawer 画图工具
-drawer.html 可帮助你绘制想要的图案
+[drawer.html](http://seasonstar.github.io/anniversary/drawer.html) 可帮助你绘制想要的图案
 将绘制得到的x坐标和y坐标的数据，分别保存到`index.html`的`x_coords`和`y_coords`列表中
-[](http://785i8w.com2.z0.glb.qiniucdn.com/drawer-tracker.png)
+![](http://785i8w.com2.z0.glb.qiniucdn.com/drawer-tracker.png)
+
 
 ### End
-你可以画生日蛋糕，心形，画任何你想表达的东西。
-祝你成功撩妹。
+你可以画生日蛋糕，爱心，画任何你想表达的东西。
+预祝您成功撩妹。
