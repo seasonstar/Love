@@ -141,25 +141,25 @@
 	    }
 
 	    Garden.options = {
-	        petalCount: {
+	        petalCount: {   // 花瓣数
 	            min: 8,
 	            max: 15
 	        },
-	        petalStretch: {
+	        petalStretch: { // 花瓣伸展度
 	            min: 0.1,
 	            max: 3
 	        },
-	        growFactor: {
+	        growFactor: {   // 生长因素
 	            min: 0.1,
 	            max: 1
 	        },
-	        bloomRadius: {
+	        bloomRadius: {  // 绽开半径
 	            min: 5,
 	            max: 8
 	        },
-	        density: 10,
-	        growSpeed: 1000 / 60,
-	        color: {
+	        density: 10,    // 密度
+	        growSpeed: 1000 / 60,    // 绽开速度
+	        color: {        // RGBA颜色
 				rmin: 128,
 				rmax: 255,
 				gmin: 0,

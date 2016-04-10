@@ -2,7 +2,7 @@
 <html>
 <head>
  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
- <title>javascript canvas画图实例</title>
+ <title>画图工具</title>
  <meta http-equiv="X-UA-Compatible" content="IE=7" />
  <meta name="keywords" content="" />
  <meta name="description" content="" />
@@ -111,7 +111,7 @@
             };
             this.imgurl.onclick=function()
             {
-                t.getUrl();
+                t.getCoordinates();
             };
         },
         movePoint:function(x,y,dragging)
@@ -152,7 +152,7 @@
                 if(this.touch) touch.preventDefault();
                 else window.event.returnValue = false;
         },
-        getUrl:function()
+        getCoordinates:function()
         {
             this.$("data").innerHTML='X坐标: <p>['+this.saved_x+']</p>'+
                 'Y坐标: <p>['+this.saved_y+']</p>';
