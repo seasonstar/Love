@@ -1,10 +1,14 @@
 # Anniversary
 Shawn Tang and Mary Zhang 一周年纪念
-[Demo](http://seasonstar.github.io/anniversary/)
 
 A HTML5 page using codes to express a programmer's romance for his girl.
+
 用以表达程序员的浪漫，给你身边的女生惊喜。
-设计了画图工具，希望能让非程序员也能玩起来。
+
+设计了[画图工具](http://seasonstar.github.io/anniversary/drawer.html)，希望能让非程序员也能玩起来。
+
+[Demo](http://seasonstar.github.io/anniversary/)
+
 
 ## Screenshot
 ![](http://785i8w.com2.z0.glb.qiniucdn.com/love-story.png)
@@ -12,7 +16,7 @@ A HTML5 page using codes to express a programmer's romance for his girl.
 ## 使用说明
 0. `git clone https://github.com/seasonstar/anniversary.git`
 
-1. 打开 画图工具[drawer.html](http://seasonstar.github.io/anniversary/drawer.html)
+1. 打开 画图工具 [drawer.html](http://seasonstar.github.io/anniversary/drawer.html)
 
 2. 绘制你想要的图像。
 
@@ -59,7 +63,9 @@ flower效果在`js/garden.js`上设置.
 
 ## Drawer 画图工具
 [drawer.html](http://seasonstar.github.io/anniversary/drawer.html) 可帮助你绘制想要的图案
+
 将绘制得到的x坐标和y坐标的数据，分别保存到`index.html`的`x_coords`和`y_coords`列表中
+
 ![](http://785i8w.com2.z0.glb.qiniucdn.com/drawer-tracker.png)
 
 
