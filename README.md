@@ -68,6 +68,21 @@ flower效果在`js/garden.js`上设置.
 
 ![](http://785i8w.com2.z0.glb.qiniucdn.com/drawer-tracker.png)
 
+## deploy
+部署到你个人的github上
+```
+git clone https://github.com/seasonstar/time-clock-for-love.git
+
+cd time-clock-for-love
+
+git branch gh-pages
+
+git checkout gh-pages
+
+git push origin gh-pages
+```
+
+然后打开`http://<自己的账号名>.github.io/time-clock-for-love/`，就可以看到了。
 
 ### End
 你可以画生日蛋糕，爱心，画任何你想表达的东西。
