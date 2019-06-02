@@ -146,8 +146,8 @@
 	            max: 15
 	        },
 	        petalStretch: { // 花瓣伸展度
-	            min: 0.1,
-	            max: 3
+	            min: 0.15,
+	            max: 3.5
 	        },
 	        growFactor: {   // 生长因素
 	            min: 0.1,
@@ -155,9 +155,9 @@
 	        },
 	        bloomRadius: {  // 绽开半径
 	            min: 5,
-	            max: 8
+	            max: 9
 	        },
-	        density: 10,    // 密度
+	        density: 12,    // 密度
 	        growSpeed: 1000 / 60,    // 绽开速度
 	        color: {        // RGBA颜色
 				rmin: 128,
